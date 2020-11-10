@@ -1,0 +1,40 @@
+{% extends "layout.html" %}
+{% block body %}
+{% if session.log %}
+<a href = "{{url_for('logout')}}" > Log out </a>
+<br>
+<a href = "{{url_for('add')}}" > Add image </a>
+<br>
+<a href = "{{url_for('search')}}" > Search for image </a>
+<div>
+<br>
+{% for img in images %}
+<div style="display: flex; justify-content: center; ">
+<img src="{{url_for('static', filename=img) }}" style = "width: 200px; length : 200px"> 
+</div>
+	<table>
+		<tr>
+			{% for h1 in headers[loop.index-1]%}
+			<td>
+				{{h1}}
+			</td>
+			{% endfor %}
+		</tr>
+		<tr>
+			{%for data in meta[loop.index-1]%}
+			<td>
+				{{data}}
+			</td>	
+			{% endfor %}
+		</tr>
+	</table>
+<br>
+{% endfor %}
+</div>
+{% else %}
+<a href = "{{url_for('login')}}" > Log In </a>
+<br>
+<br>
+<a href = "{{url_for('register')}}" > Register </a>
+{% endif %}
+{% endblock %}

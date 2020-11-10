@@ -1,0 +1,31 @@
+{% extends "layout.html" %}
+{% block body %}
+{% if session.log %}
+<h1>Upload an image</h1>
+      <hr>
+
+      <form action="" method="POST" enctype="multipart/form-data">
+
+        <div class="form-group">
+          <label>Select image</label>
+          <div class="custom-file">
+            <input type="file" name="image" id="image">
+            <label for="image">Select image...</label>
+          </div>
+        </div>
+
+        <button type="submit" class="btn btn-primary">Upload</button>
+
+      </form>
+
+      <p>
+      	Return to <a href = "{{url_for('index')}}"> index </a> page
+      </p>
+{% else %}
+
+	<p>
+		Forbidden to access : Please <a href = "{{url_for('login')}}" >Log in </a>
+	</p>
+
+{% endif %}
+{% endblock %}

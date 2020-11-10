@@ -1,0 +1,30 @@
+version: '3'
+services:
+  app:
+    container_name: docker-flask-mongo
+    restart: always
+    build: .
+    ports: 
+      - '5000:5000'
+    external_links:
+      - mongo
+    volumes:
+      - appdata:/app
+    environment: 
+      APP_ENV: "prod"
+      APP_DEBUG: "True"
+    depends_on: 
+      - mongo
+  
+  mongo:
+    container_name: mongo
+    image: mongo
+    ports: 
+      - '27017:27017'
+    volumes: 
+      - mongodata:/data/db
+volumes:
+  mongodata:
+    driver: local
+  appdata:
+    driver: local

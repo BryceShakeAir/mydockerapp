@@ -1,0 +1,65 @@
+{% extends "layout.html" %}
+{% block body %}
+{% if session.log %}
+<a href="{{url_for('index')}}">
+index
+</a>
+<br>
+<br>
+ <form action="" method="POST">
+
+ 	<p> Y resolution 
+ 	<input type="text" name="Yresolution1">
+ 	<input type="text" name="Yresolution2">
+ 	</p>
+
+ 	<p> X resolution 
+ 	<input type="text" name="Xresolution1">
+ 	<input type="text" name="Xresolution2">
+ 	</p>
+
+ 	<p> Make
+ 	<input type = "text" name="make">
+ 	</p>
+
+ 	<p> Flash
+ 	<input type = "text" name="flash">
+ 	</p>
+
+ 	<p> Exif Version
+ 	<input type = "text" name="flash">
+ 	</p>
+
+ 	<p> Shutter Speed Value
+ 	<input type="text" name="shutter1">
+ 	<input type="text" name="shutter2">
+ 	</p>
+
+ 	<input type="submit" name="submit" value = "Submit">
+
+ </form>
+
+{% for query in queries %}
+<div style="display: flex; justify-content: center; ">
+<img src="{{url_for('static', filename=image1[loop.index-1]) }}" style = "width: 200px; length : 200px"> 
+</div>
+<table>
+	<tr>
+	{% for key in query %}
+		<td> {{key}} </td>
+	{% endfor %}
+	</tr>
+	<tr>
+	{% for key in query %}
+		<td> {{query[key]}} </td>
+	{% endfor %}
+	</tr>
+</table>
+<br>
+<br>
+{% endfor %}
+{% else %}
+Forbidden to access :
+<a href = "{{url_for('login')}}" > Log In </a>
+{% endif %}
+{% endblock %}
